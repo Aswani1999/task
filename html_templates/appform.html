@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Account Application Form</title>
+    <script>
+        function updateBranches() {
+            var districtDropdown = document.getElementById("district");
+            var selectedDistrict = districtDropdown.value;
+            var branchDropdown = document.getElementById("branch");
+            branchDropdown.innerHTML = "";
+
+            if (selectedDistrict === "Ernakulam") {
+                var branches = ["Aluva", "Edapally","Palarivattom","Kakkanad"];
+            } else if (selectedDistrict === "Malappuram") {
+                var branches = ["Manjeri", "Nilambur","Perithalmanna","Tirur"];
+            } else if (selectedDistrict === "Calicut") {
+                var branches = ["Vadakkara", "Thamarasherry","Perambra","Themala"];
+            } else if (selectedDistrict === "Palakkad") {
+                var branches = ["Parambikulam", "Nelliyampathi","Kangenkode","Kizhakambalam"];
+            } else if (selectedDistrict === "Kollam") {
+                var branches = ["Thenmala", "Poonpara","varkala","Kallaar"];
+            } else if (selectedDistrict === "Thrivandrum") {
+                var branches = ["Neyyar", "Kangankode","chembra","vyshakapuram"];
+            } else {
+                var branches = [];
+            }
+
+            for (var i = 0; i < branches.length; i++) {
+                var option = document.createElement("option");
+                option.text = branches[i];
+                branchDropdown.add(option);
+            }
+        }
+    </script>
+</head>
+
+<!--<body style="background-image:url('{% static 'images/pics.jpg'%}');">-->
+<center>
+    <h1>Account Application Form</h1>
+    <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" required><br><br/>
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" required><br><br/>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" required><br><br/>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select><br><br/>
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" required><br><br/>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" required><br><br/>
+
+        <label for="address">Address:</label>
+        <textarea id="address" rows="4" required></textarea><br><br/>
+
+        <label for="district">District:</label>
+        <select id="district" onchange="updateBranches()" required>
+            <option value="" disabled selected>Select District</option>
+            <option value="Ernakulam">Ernakulam</option>
+            <option value="Malappuram">Malappuram</option>
+            <option value="Calicut">Calicut</option>
+            <option value="Palakkad">Palakkad</option>
+            <option value="Kollam">Kollam</option>
+            <option value="Thrivandrum">Thrivandrum</option>
+        </select><br><br/>
+
+        <label for="branch">Branch:</label>
+        <select id="branch" required>
+            <option value="" disabled selected>Select Branch</option>
+        </select><br><br/>
+
+        <label for="accountType">Account Type:</label>
+        <select id="accountType" required>
+            <option value="" disabled selected>Select Account Type</option>
+            <option value="savings">Savings Account</option>
+            <option value="current">Current Account</option>
+        </select><br><br/>
+
+        <p>Materials Provided:</p>
+        <input type="checkbox" id="debitCard">
+        <label for="debitCard">Debit Card</label>
+        <input type="checkbox" id="creditCard">
+        <label for="creditCard">Credit Card</label>
+        <input type="checkbox" id="chequeBook">
+        <label for="chequeBook">Cheque Book</label><br><br/>
+
+        <button type="button"><a href="{% url 'submit' %}">Submit</a></button>
+        <button type="button"><a href="{% url 'logout' %}">Logout</a></button>
+
+    </form>
+
+    <div id="message"></div>
+
+
+  </center>
+</body>
+
+</html>
